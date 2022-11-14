@@ -3,143 +3,176 @@
 
 using namespace std;
 
-class Human{
-    
-    public:
-    
+class Human {
+
+public:
+
     int weight, height, age;
     string name, education;
-    
-    void setWeigth(int weight){
-        if (weight > 0){
-            this->weight = weight;    
+
+    void setWeigth(int weight) {
+        if (weight > 0) {
+            this->weight = weight;
         }
-        else{
+        else {
             cout << "Error" << endl;
         }
     }
-    
-    void setHeigth(int height){
-        if (height > 0){
-            this->height = height;    
+
+    void setHeigth(int height) {
+        if (height > 0) {
+            this->height = height;
         }
-        else{
+        else {
             cout << "Error" << endl;
         }
     }
-    
-    void setAge(int age){
-        if (age >= 18){
-            this->age = age;    
+
+    void setAge(int age) {
+        if (age >= 18) {
+            this->age = age;
         }
-        else{
+        else {
             cout << "Error" << endl;
         }
     }
-    
-    void setName(string name){
-        if (name == ""){
+
+    void setName(string name) {
+        if (name == "") {
             cout << "Error" << endl;
         }
-        else{
-            this->name = name;    
+        else {
+            this->name = name;
         }
     }
-    
-    void setEducation(string education){
-        if (education == ""){
+
+    void setEducation(string education) {
+        if (education == "") {
             cout << "Error" << endl;
         }
-        else{
-            this->education = education;    
+        else {
+            this->education = education;
         }
     }
-    
-    int getWeight(){
+
+    int getWeight() {
         return weight;
     }
-    
-    int getHeight(){
+
+    int getHeight() {
         return height;
     }
-    
-    int getAge(){
+
+    int getAge() {
         return age;
     }
-    
-    string getName(){
+
+    string getName() {
         return name;
     }
-    
-    string getEducation(){
+
+    string getEducation() {
         return education;
     }
+
+    void getInfo() {
+
+        cout << "Name: " << getName() << endl
+            << "Age: " << getAge() << endl
+            << "Weight: " << getWeight() << endl
+            << "Height: " << getHeight() << endl
+            << "Education: " << getEducation() << endl;
+    }
 };
 
-class Person : public Human{
-    
-    public:
-    
+class Person : public Human {
+
+public:
+
     string resume;
     int skills;
-    
-    void setResume(string resume){
+
+    void setResume(string resume) {
         this->resume = resume;
     }
-    
-    void setSkills(int skills){
-        if (skills > 0){
+
+    void setSkills(int skills) {
+        if (skills > 0) {
             this->skills = skills;
         }
-        else{
+        else {
             cout << "Error" << endl;
         }
     }
-    
-    string getResume(){
+
+    string getResume() {
         return resume;
     }
-    
-    int getSkills(){
+
+    int getSkills() {
         return skills;
+    }
+
+    void getInfo() {
+        Human::getInfo();
+        cout << "Resume: " << getResume() << endl
+            << "Skills: " << getSkills() << endl;
     }
 };
 
-class Employ : public Human{
-    
-    public:
-    
+class Employ : public Human {
+
+public:
+
     string workExperience;
     int seniority;
-    
-    void setWorkExperience(string workExperience){
+
+    void setWorkExperience(string workExperience) {
         this->workExperience = workExperience;
     }
-    
-    void setSeniority(int seniority){
-        if (this->workExperience == ""){
+
+    void setSeniority(int seniority) {
+        if (this->workExperience == "") {
             this->seniority = 0;
         }
-        else if (seniority > 0){
+        else if (seniority > 0) {
             this->seniority = seniority;
         }
-        else{
+        else {
             cout << "Error" << endl;
         }
     }
-    
-    string getWorkExperience(){
+
+    string getWorkExperience() {
         return workExperience;
     }
-    
-    int getSeniority(){
+
+    int getSeniority() {
         return seniority;
+    }
+
+    void getInfo() {
+        Human::getInfo();
+        cout << "Work expirience: " << getWorkExperience() << endl
+            << "Seniority: " << getSeniority() << endl;
     }
 };
 
 int main()
 {
-    cout<<"Hello World";
+    
+    Employ Tom;
+
+    Tom.setAge(20);
+    Tom.setEducation("High");
+    Tom.setHeigth(183);
+    Tom.setName("Thomas");
+    Tom.setWeigth(80);
+    Tom.setWorkExperience("Junior C++");
+    Tom.setSeniority(2);
+
+
+    Tom.getInfo();
 
     return 0;
 }
