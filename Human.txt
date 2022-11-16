@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <list>
 
 using namespace std;
 
@@ -10,7 +11,7 @@ public:
     int weight, height, age;
     string name, education;
 
-    void setWeigth(int weight) {
+    void setWeight(int weight) {
         if (weight > 0) {
             this->weight = weight;
         }
@@ -19,7 +20,7 @@ public:
         }
     }
 
-    void setHeigth(int height) {
+    void setHeight(int height) {
         if (height > 0) {
             this->height = height;
         }
@@ -127,6 +128,17 @@ public:
     string workExperience;
     int seniority;
 
+    Employ(Person person, string workExperience, int seniority)
+    {
+        this->age = person.getAge();
+        this->education = person.getEducation();
+        this->height = person.getHeight();
+        this->name = person.getName();
+        this->seniority = seniority;
+        this->weight = person.getWeight();
+        this->workExperience = workExperience;
+    }
+
     void setWorkExperience(string workExperience) {
         this->workExperience = workExperience;
     }
@@ -158,21 +170,72 @@ public:
     }
 };
 
+list <Person> persons;
+list <Person>::iterator itPer;
+
+list <Employ> employs;
+list <Employ>::iterator itEmp;
+
+void start() {
+
+    int weight, height, age, count = 3, skills;
+    string name, education, resume;
+
+    for (int i = 0; i < count; i++) {
+
+        persons.push_back(Person());
+    }
+
+    for (itPer = persons.begin(); itPer != persons.end(); itPer++) {
+        cout << "Enter your name: "; cin >> name; itPer->setName(name);
+        cout << "Enter your weight: "; cin >> weight; itPer->setWeight(weight); 
+        cout << "Enter your height: "; cin >> height; itPer->setHeight(height); 
+        cout << "Enter your age: "; cin >> age; itPer->setAge(age); 
+        cout << "Enter your education: "; getline(cin >> ws, education); itPer->setEducation(education); 
+        cout << "Enter your resume: "; getline(cin >> ws, resume); itPer->setResume(resume); 
+        cout << "Enter count of your skills: "; cin >> skills; itPer->setSkills(skills); 
+        cout << endl;
+    }
+}
+
+void showAllPersons() {
+
+    for (itPer = persons.begin(); itPer != persons.end(); itPer++) {
+        itPer->getInfo();
+        cout << endl;
+    }
+}
+
+void regist() {
+
+    string workExperience, name;;
+    int seniority;
+
+    cout << "Enter name, which you want to move to Employ: "; getline(cin >> ws, name);
+    for (itPer = persons.begin(); itPer != persons.end(); itPer++) {
+        if (name == itPer->getName()) {
+            cout << "Enter the work experience: "; getline(cin >> ws, workExperience);
+            cout << "Enter the seniority: "; cin >> seniority;
+            employs.push_back(Employ((*itPer), workExperience, seniority));
+        }
+    }
+}
+
+void showAllEmploys() {
+
+    for (itEmp = employs.begin(); itEmp != employs.end(); itEmp++) {
+        itEmp->getInfo();
+        cout << endl;
+    }
+}
+
 int main()
 {
     
-    Employ Tom;
-
-    Tom.setAge(20);
-    Tom.setEducation("High");
-    Tom.setHeigth(183);
-    Tom.setName("Thomas");
-    Tom.setWeigth(80);
-    Tom.setWorkExperience("Junior C++");
-    Tom.setSeniority(2);
-
-
-    Tom.getInfo();
+    start();
+    showAllPersons();
+    regist();
+    showAllEmploys();
 
     return 0;
 }
